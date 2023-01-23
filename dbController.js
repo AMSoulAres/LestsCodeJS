@@ -1,6 +1,6 @@
 class Db {
-  static baseUrl = "http://localhost:3000/profile";
-  static productsUrl = "http://localhost:3000/products"
+  static baseUrl = "http://localhost:3000/posts";
+  static productsUrl = "http://localhost:3000/profile"
 
   static async addItem(item) {
     try {

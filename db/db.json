@@ -1,4 +1,15 @@
-{"products": [
+{
+  "posts": [
+   
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [
     {
       "id": 1,
       "title": "iPhone 9",
@@ -47,7 +58,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://raw.githubusercontent.com/Ovi/DummyJSON/master/src/data/images/products/3/thumbnail.jpg",
-      "images": ["https://raw.githubusercontent.com/Ovi/DummyJSON/master/src/data/images/products/3/1.jpg"]
+      "images": [
+        "https://raw.githubusercontent.com/Ovi/DummyJSON/master/src/data/images/products/3/1.jpg"
+      ]
     },
     {
       "id": 4,
@@ -549,7 +562,5 @@
         "https://raw.githubusercontent.com/Ovi/DummyJSON/master/src/data/images/products/30/thumbnail.jpg"
       ]
     }
-  ],
-  "total": 100,
-  "skip": 0,
-  "limit": 30}
+  ]
+}
