@@ -8,14 +8,23 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="cabecalho">
-      <div class="logo"></div>
+    <header class="cabecalho">
+      <img src="Assets/OIP.jfif" id="logoImg">
+      <div class="nome">Shop Tech</div>
       <div class="carrinho">
           <div class="qtdCarrinho">x</div>
       </div>
-      <div class="nome">Shop Tech</div>
-  </div>
-  
+    </header>
+  <section class="productsList-container">
+    <div class="card">
+      <img class="imgCard" rc="jeans3.jpg" style="width:100%">
+      <h1 class="name">Tailored Jeans</h1>
+      <p class="price">R$19.99</p>
+      <p class="desc">Qualquer coisa</p>
+      <p><button class="addToCart">Adicionar</button></p>
+    </div> 
+  </section>
+
       <button class="render">Render</button>
     <script type="module" src="index.js"></script>
   </body>
