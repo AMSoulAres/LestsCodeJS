@@ -36,8 +36,8 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
 
   #logoImg{
     margin-left: 10px;
-    height: 100%;
     mix-blend-mode: multiply;
+    padding-bottom: 10px;
   }
   
   .qtdCarrinho {
@@ -47,19 +47,7 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     font-family: Arial, Helvetica, sans-serif;
   }
 
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 250px;
-    max-height: 300px;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-  }
   
-  .price {
-    color: grey;
-    font-size: 22px;
-  }
   
   .productsList-container{
     align-items: center;
@@ -71,13 +59,33 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     max-width: 900px;
     margin: 0 auto;
   }
-
+  
   .productsList-container > div{
     flex: 1 1 200px;
   }
+  .card {
+    padding: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 250px;
+    height: 300px;
+    text-align: center;
+    font-size: 12px;
+    font-family: arial;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
 
-  .card button {
-    display: block;
+  .addToCart {
     border: none;
     outline: 0;
     padding: 12px;
@@ -87,13 +95,50 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    bottom: 0px;
+  }
+
+  .addToCart:hover {
+    opacity: 0.7;
+    transition: 0.2s;
+  }
+
+  .imgDiv {
+    position: relative;
   }
   
   .imgCard{
-    max-width: 70%;
-    display: blocks;
+    margin-top: 10px;
+    max-width: 80%;
+    max-height: 200px;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  .card button:hover {
-    opacity: 0.7;
+  .discount{
+    top: 10px;
+    right: 10%;
+    padding-top:10px;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    height: 35px;
+    width: 45px;
+    color: rgb(235, 252, 255);
+    background-color: rgb(0, 117, 172);
+    border-radius: 100%;
+
+  }
+
+
+  .produtos {
+    text-align: center;
+    background-color: aliceblue;
+  }
+  .imgProdutos {
+    height: 100px;
+    width: 100px;
+  }
+  input {
+    visibility: hidden;
   }
