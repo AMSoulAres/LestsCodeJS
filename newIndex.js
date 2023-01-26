@@ -30,52 +30,48 @@ function renderProducts() {
       let maisBtn = document.createElement("button");
       maisBtn.className = "maismenosBtn";
       maisBtn.id = `${product.id}btnmais`;
-      maisBtn.innerHTML = "+";
-      maisBtn.onclick = addToCart;
+      maisBtn.innerText = "+";
+      maisBtn.onclick = mais;
       let menosBtn = document.createElement("button");
       menosBtn.className = "maismenosBtn";
       menosBtn.id = `${product.id}btnmenos`;
-      menosBtn.innerHTML = '-';
-      menosBtn.onclick = subFromCart;
+      menosBtn.innerText = "-";
+      menosBtn.onclick = menos;
       let qtd = document.createElement("p");
       qtd.className = "qtdMaisMenos";
       qtd.id = `${product.id}btnqtd`;
-      qtd.innerHTML = 0;
-      let addBtn = document.createElement("button");
-      addBtn.id = `${product.id}btn`;
-      addBtn.className = "addToCart";
-      addBtn.innerHTML = "Adicionar";
-      addBtn.onclick = showMaisMenos;
+      qtd.innerText = "0";
+      let addToCart = document.createElement("button");
+      addToCart.id = `${product.id}btn`;
+      addToCart.className = "addToCart";
+      addToCart.innerHTML = "Adicionar";
+      addToCart.onclick = showMaisMenos;
       let juntaBtns = document.createElement("div");
       juntaBtns.className = "juntaBtn";
-      maismenos.appendChild(menosBtn);
-      maismenos.appendChild(qtd);
       maismenos.appendChild(maisBtn);
+      maismenos.appendChild(qtd);
+      maismenos.appendChild(menosBtn);
       imgDiv.appendChild(discount);
       imgDiv.appendChild(imgHtml);
       cardHtml.appendChild(imgDiv);
       cardHtml.appendChild(nameHtml);
       cardHtml.appendChild(priceHtml);
       cardHtml.appendChild(descHtml);
+      cardHtml.appendChild(maismenos);
       juntaBtns.appendChild(maismenos);
       juntaBtns.appendChild(addBtn);
       cardHtml.appendChild(juntaBtns);
+      cardHtml.appendChild(addToCart);
       productsList.appendChild(cardHtml);
-
-      document.querySelector("#flush").onclick = flushCart;
     });
     getLocalStorage(products);
   });
 }
-
 function getLocalStorage(products) {
   let qtdCarrinho = document.querySelector(".qtdCarrinho");
-  let list = Storage.getList();
-  if (list && list !== []) {
-    let quantidades = list.map((elem) => {
+  if (Storage.getList()) {
+    let quantidades = Storage.getList().map((elem) => {
       if (elem.quantidade) {
-        document.querySelector(`[id="${elem.id}maismenos"]`).style.visibility = 'visible';
-        document.querySelector(`[id="${elem.id}btnqtd"]`).innerHTML = elem.quantidade;
         return elem.quantidade;
       } else {
         return 0;
@@ -89,67 +85,54 @@ function getLocalStorage(products) {
       let prod = {};
       prod.id = product.id;
       prod.title = product.title;
-      prod.quantidade = 0;
+      prod.qtd = 0;
       lista.push(prod);
     });
     Storage.add(lista);
   }
 }
-
-function addToCart() {
-  let prodID = parseInt(this.id.replace("btnmais", ""));
-  Storage.update(prodID, 1);
-  let itemAtualizado = Storage.getItem(prodID);
-  document.querySelector(`[id="${prodID}btnqtd"]`).innerHTML = itemAtualizado.quantidade;
-  document.querySelector(`.qtdCarrinho`).innerHTML = Storage.getAllCount()
+function mais() {
+  let x = `${this.id.replace("btnmais", "")}btnqtd`;
+  let qtd = document.querySelector(`[id='${x}']`);
+  let produto = Storage.getByid(Number(this.id.replace("btnmais", "")));
+  let count = produto.qtd + 1;
+  let novoProduto = {
+    id: Number(this.id.replace("btnmais", "")),
+    title: produto.title,
+    qtd: count,
+  };
+  Storage.update(novoProduto);
+  qtd.innerText = Storage.getByid(Number(this.id.replace("btnmais", ""))).qtd;
+  let qtdCarrinho = document.querySelector(".qtdCarrinho");
+  qtdCarrinho.innerText = Storage.getAllCount();
 }
-
-function subFromCart() {
-  let prodID = parseInt(this.id.replace("btnmenos", ""));
-  let itemAtualizado = Storage.getItem(prodID);
-  if (itemAtualizado.quantidade - 1 < 0) {
-    let x = `${prodID}maismenos`;
+function menos() {
+  let x = `${this.id.replace("btnmenos", "")}btnqtd`;
+  let qtd = document.querySelector(`[id='${x}']`);
+  let produto = Storage.getByid(Number(this.id.replace("btnmenos", "")));
+  let count = produto.qtd - 1;
+  let novoProduto = {
+    id: Number(this.id.replace("btnmenos", "")),
+    title: produto.title,
+    qtd: count,
+  };
+  if (novoProduto.qtd < 0) {
+    console.warn("qtd não pode ser menor que zero");
+    let x = `${this.id.replace("btnmenos", "")}maismenos`;
     let maismenos = document.querySelector(`[id='${x}']`);
     maismenos.style.visibility = "hidden";
   } else {
-    Storage.update(prodID, -1);
-    let qtdAtt = document.querySelector(`[id="${prodID}btnqtd"]`);
-    qtdAtt.innerHTML = itemAtualizado.quantidade-1;
+    Storage.update(novoProduto);
   }
-  document.querySelector(`.qtdCarrinho`).innerHTML = Storage.getAllCount();
+  qtd.innerText = Storage.getByid(Number(this.id.replace("btnmenos", ""))).qtd;
+  let qtdCarrinho = document.querySelector(".qtdCarrinho");
+  qtdCarrinho.innerText = Storage.getAllCount();
 }
-
-function flushCart(){
-  Storage.remove();
-  document.location.reload()
-}
-
 function showMaisMenos() {
-  let btn = document.querySelector(
-    `[id = "${this.id.replace("btn", "maismenos")}"]`
-  );
+  let qtdCarrinho = document.querySelector(".qtdCarrinho");
+  qtdCarrinho.innerText = Storage.getAllCount();
+  let x = `${this.id.replace("btn", "")}maismenos`;
+  let btn = document.querySelector(`[id='${x}']`);
   btn.style.visibility = "visible";
 }
-// function addToCart(count) {//   for (var counter = 0; counter < btnmais.length; counter++) {//     btnmais[counter].addEventListener("click", function () {//       count += 1;//       localStorage.setItem("produtos", count);//       let qtdCarrinho = document.querySelector(".qtdCarrinho");//       qtdCarrinho.innerText = localStorage.getItem("produtos");//     });//   }//   return count;// }
-// function subFromCart(count) {
-//   for (var counter = 0; counter < btnmenos.length; counter++) {
-//     btnmenos[counter].addEventListener("click", function () {
-//       count -= 1;
-//       if (count >= 0) {
-//         localStorage.setItem("produtos", count);
-//         let qtdCarrinho = document.querySelector(".qtdCarrinho");
-//         qtdCarrinho.innerText = localStorage.getItem("produtos");
-//       } else {
-//         count = 0;
-//         btns.style.visibility = "visible";
-//         this.style.visibility = "hidden";
-//         let x = btnmais.find((btn) => btn.id == this.id);
-//         console.log(this.id);
-//         x.style.visibility = "hidden";
-//       }
-//     });
-//   }
-//   return count;
-// }
-
 window.addEventListener("load", renderProducts);

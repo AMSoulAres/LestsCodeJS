@@ -8,10 +8,29 @@
     display: flex;
     justify-content: space-between;
     background: rgb(2,0,36);
-background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
     margin: 0;
     padding-top: 10px;
     height: 80px;
+  }
+  
+  .nome {
+    font-size: 65px;
+    color: #b5d1f0;
+    font-family: 'Share Tech Mono', monospace;
+  
+  }
+  
+  .logo {
+    display: flex;
+    max-height: 75px;   
+    justify-content: space-between;
+  }
+  
+  #logoImg{
+    margin-left: 10px;
+    mix-blend-mode: multiply;
+    padding-bottom: 10px;
   }
   
   .carrinho_section{
@@ -36,24 +55,20 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  .nome {
-    font-size: 65px;
-    color: #b5d1f0;
+  #flush{
+    border: none;
+    border-radius: 5px;
+    background-color: #041b35;
+    position:absolute;
+    color: rgb(255, 255, 255);
+    top: 40%;
+    margin-right: 5px;
+    width: 50px;
+    right: 100%;
     font-family: 'Share Tech Mono', monospace;
-
+    
   }
   
-  .logo {
-    display: flex;
-    max-height: 75px;   
-    justify-content: space-between;
-  }
-
-  #logoImg{
-    margin-left: 10px;
-    mix-blend-mode: multiply;
-    padding-bottom: 10px;
-  }
   
   .productsList-container{
     align-items: center;
@@ -80,6 +95,7 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 20px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,6 +109,7 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
 
   .addToCart {
     border: none;
+    border-radius: 0 0 5px 5px;
     outline: 0;
     padding: 12px;
     color: white;
@@ -102,11 +119,7 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     width: 100%;
     font-size: 18px;
     bottom: 0px;
-  }
-
-  .addToCart:hover {
-    opacity: 0.7;
-    transition: 0.2s;
+    font-family: 'Share Tech Mono', monospace;
   }
 
   .imgDiv {
@@ -135,16 +148,56 @@ background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba
     border-radius: 100%;
 
   }
+  
+  .juntaBtn{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .maismenos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 22px;
+    width: 100%;
+    margin-bottom: 3px;
+    background-color: rgb(189, 204, 209);
+    align-items: center;
+  }
+
+  .maismenosBtn {
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 20%;
+    height: 100%;
+    background-color: rgb(3, 90, 148);
+    border: none;
+    border-radius: 5px;
+    color: antiquewhite;
+    font-size: 15px;
+  }
 
 
-  .produtos {
-    text-align: center;
-    background-color: aliceblue;
+  .qtdMaisMenos {
+    font-size: 15px;
+    font-family: 'Share Tech Mono', monospace;
   }
-  .imgProdutos {
-    height: 100px;
-    width: 100px;
+
+
+  button:hover{
+    opacity: 0.8;
+    transition: 0.5s;
   }
+
+  button:active{
+    opacity: 0.9;
+    transition: 0.1s;
+    filter: brightness(50%)
+    
+  }
+
   input {
     visibility: hidden;
   }

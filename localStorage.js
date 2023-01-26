@@ -2,18 +2,30 @@ class Storage {
     static add(list) {
       localStorage.setItem("@carrinho", JSON.stringify(list));
     }
-    static update(id, produto) {
+
+    static update(id, quantidade) {
       const lista = localStorage.getItem("@carrinho");
       if(lista){
           let listaDes = JSON.parse(lista);
-          for (i = 1; i <= lista.length; i++){
-            if (id === lista.produto.id){
-              lista.produto = produto;
+          for (let i = 0; i < lista.length; i++){
+            if (id === listaDes[i].id){
+              listaDes[i].quantidade += quantidade;
               break;
             }
           }
-          Storage.add(lista);
+          Storage.add(listaDes);
       }
+    }
+
+    static getAllCount() {
+      const lista = localStorage.getItem("@carrinho");
+      let listaDes = JSON.parse(lista);
+      return listaDes.map((elem) => elem.quantidade).reduce((ac, at) => ac + at);
+    }
+
+    static getItem(id) {
+      let lista = Storage.getList();
+      return lista[id-1];
     }
   
     static getList() {
@@ -25,9 +37,8 @@ class Storage {
       return undefined;
     }
 
-    static remove(list, item){
-      list = []
-      Storage.add(list);
+    static remove(){
+      localStorage.clear()
     }
   }
   
